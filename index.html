@@ -4,11 +4,32 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/teimtrackr/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>Teimtrackr</title>
-    <script type="module" crossorigin src="/teimtrackr/assets/index-VwQtJiZq.js"></script>
-    <link rel="stylesheet" crossorigin href="/teimtrackr/assets/index-DDHbP4bv.css">
+    <script>
+      // Prevent FOUC (Flash of Unstyled Content) by applying theme immediately
+      (function() {
+        try {
+          const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const effectiveTheme = systemPrefersDark ? 'dark' : 'light';
+
+          document.documentElement.classList.add(effectiveTheme);
+          document.body.classList.add(effectiveTheme);
+
+          // Set initial background color to prevent flashing
+          document.body.style.backgroundColor = effectiveTheme === 'dark' ? '#0f172a' : '#ffffff';
+        } catch (e) {
+          // Fallback to dark theme if anything goes wrong
+          document.documentElement.classList.add('dark');
+          document.body.classList.add('dark');
+          document.body.style.backgroundColor = '#0f172a';
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/teimtrackr/assets/index-CA3IMpch.js"></script>
+    <link rel="stylesheet" crossorigin href="/teimtrackr/assets/index-C48RFEwF.css">
   </head>
-  <body class="dark" style="background-color: #1e1e1e;">
-    <div id="app" class="p-2"></div>
+  <body style="transition: background-color 0.2s ease, color 0.2s ease;">
+    <div id="app"></div>
   </body>
 </html>
